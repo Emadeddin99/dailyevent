@@ -1,0 +1,84 @@
+#main-body {
+    background-color: #f4f1ed;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.time-block {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.time-block.show {
+    display: flex;
+}
+
+.hour {
+    width: 60px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.event-input {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: transform 0.1s ease;
+}
+
+.event-input:focus {
+    background-color: #e0f7fa;
+}
+
+.save-btn {
+    margin-left: 10px;
+    padding: 8px 12px;
+    background-color: #1d72e8;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.save-btn:active {
+    transform: scale(0.95);
+    background-color: #155ab6;
+}
+
+.save-btn:hover {
+    background-color: #f17373;
+}
+
+.past {
+    background-color: #f8d7da;
+}
+
+.present {
+    background-color: #d4edda;
+}
+
+.future {
+    background-color: #fff3cd;
+}
+
+.currentDay {
+  background-color: #f4f1ed;
+  text-align: center;
+  font-size: 1.2em;
+  margin-top: 40px;
+  padding: 10px;
+  color: #333;
+}
+
