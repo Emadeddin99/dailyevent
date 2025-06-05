@@ -83,6 +83,16 @@ h1 {
     background-color: #f17373;
 }
 
+.save-btn {
+  transition: opacity 0.3s ease;
+}
+
+.time-block.past .save-btn {
+  opacity: 0;
+  pointer-events: none;
+}
+
+
 .past {
     background-color: #f8d7da;
 }
