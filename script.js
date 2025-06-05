@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+  console.log("Script is running!");
+
   const currentDate = new Date();
   const todayDate = currentDate.toDateString();
 
@@ -25,10 +27,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 🔔 Ask for permission to send browser notifications
   const notificationAsked = localStorage.getItem('notificationAsked');
-  if (notificationAsked !== 'true' && Notification.permission !== 'granted') {
-    Notification.requestPermission().then(permission => {
-      localStorage.setItem('notificationAsked', 'true');
-    });
+  if ('Notification' in window) {
+    if (notificationAsked !== 'true' && Notification.permission !== 'granted') {
+      Notification.requestPermission().then(permission => {
+        console.log(`Notification permission: ${permission}`);
+        localStorage.setItem('notificationAsked', 'true');
+      });
+    } else {
+      console.log(`Notification permission previously handled: ${Notification.permission}`);
+    }
+  } else {
+    console.log('Browser does not support Notifications API');
   }
 
   timeBlocks.forEach(block => {
@@ -112,6 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentHour = currentTime.getHours();
     const currentMinute = currentTime.getMinutes();
 
+    console.log(`Checking reminders at ${currentHour}:${currentMinute}`);
+
     timeBlocks.forEach(block => {
       const hourText = block.querySelector('.hour').innerText.trim();
       const hour = parseHour(hourText);
@@ -122,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
           (currentHour === hour - 1 && currentMinute === 55) ||
           (currentHour === hour && currentMinute === 55)
         ) {
+          console.log(`Sending notification for event at ${hourText}`);
           sendBrowserNotification(`Upcoming event at ${hourText}: "${savedData}"`);
         }
       }
@@ -153,10 +165,14 @@ function showNotification(message) {
 }
 
 function sendBrowserNotification(message) {
-  if (Notification.permission === 'granted') {
+  console.log('Trying to send browser notification...');
+  if ('Notification' in window && Notification.permission === 'granted') {
+    console.log('Permission granted! Sending notification...');
     new Notification('Reminder', {
       body: message,
-      icon: 'icon.png'
+      icon: 'icon.png' // optional icon, make sure it exists
     });
+  } else {
+    console.log('Notification permission not granted or not supported.');
   }
 }
